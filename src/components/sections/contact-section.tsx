@@ -2,6 +2,27 @@ import { clinic } from "@/config/clinic";
 import { ButtonLink } from "@/components/ui/button-link";
 import { formatAddress, toSafeGoogleHref, toTelHref } from "@/lib/utils";
 
+function mapEmbedSrc(url: string | null): string | null {
+  if (!url) {
+    return null;
+  }
+
+  let parsed: URL;
+  try {
+    parsed = new URL(url);
+  } catch {
+    return null;
+  }
+
+  const host = parsed.hostname.replace(/^www\./, "");
+  const embeddable =
+    parsed.protocol === "https:" &&
+    (host === "google.com" || host === "maps.google.com") &&
+    (parsed.pathname.startsWith("/maps/embed") || parsed.searchParams.get("output") === "embed");
+
+  return embeddable ? parsed.toString() : null;
+}
+
 const steps = [
   {
     title: "Read this page",
@@ -21,6 +42,7 @@ export function ContactSection() {
   const callHref = toTelHref(clinic.phone);
   const address = formatAddress(clinic.address);
   const mapsHref = toSafeGoogleHref(clinic.googleMapsUrl);
+  const embedSrc = mapEmbedSrc(clinic.googleMapsUrl);
   const profileHref = toSafeGoogleHref(clinic.googleReviewsUrl);
   const hours = clinic.openingHours.filter(
     (entry) => entry.days.trim().length > 0 && entry.hours.trim().length > 0,
@@ -30,7 +52,7 @@ export function ContactSection() {
   return (
     <section id="contact" aria-labelledby="contact-heading" tabIndex={-1}>
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 lg:py-24">
-        <div className="grid overflow-hidden rounded-panel border border-line lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div className="grid overflow-hidden border border-line lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <div className="bg-accent-strong px-6 py-10 text-on-accent sm:px-10 sm:py-14">
             <p className="text-sm font-semibold tracking-[0.16em] text-on-accent-muted uppercase">
               {callHref || address ? "Visit or call" : "Get in touch"}
@@ -119,6 +141,17 @@ export function ContactSection() {
             </div>
           </div>
         </div>
+        {embedSrc ? (
+          <div className="mt-6 border border-line">
+            <iframe
+              title="Map showing the clinic location"
+              src={embedSrc}
+              className="aspect-[4/3] w-full sm:aspect-video sm:max-h-96"
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          </div>
+        ) : null}
       </div>
     </section>
   );

@@ -21,7 +21,7 @@ export function GallerySection() {
           <div className="mt-10">
             <FramedPhotograph
               image={lead}
-              ratio="aspect-[3/2]"
+              ratio="aspect-[2/1]"
               sizes="(min-width: 1024px) 72rem, 100vw"
               caption={lead.caption}
             />

@@ -32,7 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${sourceSans.variable} ${sourceSerif.variable} h-full antialiased`}
     >
-      <body className="flex min-h-dvh flex-col pb-[calc(5.75rem+env(safe-area-inset-bottom))] lg:pb-0">
+      <body className="flex min-h-dvh flex-col pb-[calc(5.75rem+env(safe-area-inset-bottom))] xl:pb-0">
         <a href="#main" className="skip-link">
           Skip to content
         </a>

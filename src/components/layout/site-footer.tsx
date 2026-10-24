@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { clinic, footerNavigation } from "@/config/clinic";
+import { clinic } from "@/config/clinic";
 import { formatAddress, formatOpeningHours, toSafeGoogleHref, toTelHref } from "@/lib/utils";
 
 export function SiteFooter() {
@@ -10,6 +10,16 @@ export function SiteFooter() {
   const mapsHref = toSafeGoogleHref(clinic.googleMapsUrl);
   const reviewsHref = toSafeGoogleHref(clinic.googleReviewsUrl);
   const year = new Date().getFullYear();
+  const footerLinks = [
+    { href: "/#top", label: "Home" },
+    { href: "/#about", label: "About" },
+    { href: "/#services", label: "Services" },
+    { href: "/#guide", label: "Guide" },
+    { href: "/#faq", label: "Questions" },
+    { href: "/#gallery", label: "Gallery" },
+    { href: "/#reviews", label: "Reviews" },
+    { href: "/#contact", label: "Contact" },
+  ];
 
   return (
     <footer className="bg-accent-strong text-on-accent">
@@ -20,13 +30,13 @@ export function SiteFooter() {
             Dental clinic
           </p>
           <p className="mt-5 max-w-sm text-sm leading-6 text-on-accent-muted">
-            A guide for patients preparing for a visit. Appointments and payments are not taken on this page.
+            A patient guide to the clinic. Appointments and payments are not taken on this page.
           </p>
         </div>
         <nav aria-label="Footer" className="md:col-span-3">
           <p className="text-xs font-semibold tracking-[0.16em] uppercase">On this page</p>
           <ul className="mt-5 space-y-2.5">
-            {footerNavigation.map((item) => (
+            {footerLinks.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}

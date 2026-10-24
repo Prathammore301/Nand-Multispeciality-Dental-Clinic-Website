@@ -29,8 +29,6 @@
   --color-pending-bg: var(--pending-bg);
   --font-sans: var(--font-source-sans), "Segoe UI", sans-serif;
   --font-serif: var(--font-source-serif), Georgia, serif;
-  --radius-panel: 1.25rem;
-  --radius-control: 0.625rem;
 }
 
 html {
@@ -48,7 +46,7 @@ main section[id] {
   scroll-margin-bottom: calc(5.75rem + env(safe-area-inset-bottom));
 }
 
-@media (min-width: 64rem) {
+@media (min-width: 80rem) {
   main section[id] {
     scroll-margin-bottom: 0px;
   }

@@ -111,7 +111,7 @@ export function BottomNavigation() {
   return (
     <nav
       aria-label="Sections"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface shadow-[0_-8px_24px_rgba(28,36,33,0.06)] lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface shadow-[0_-8px_24px_rgba(28,36,33,0.06)] xl:hidden"
     >
       <ul className="mx-auto grid max-w-lg grid-cols-5 px-1.5 pt-1 pb-[max(0.35rem,env(safe-area-inset-bottom))]">
         {tabs.map((tab) => {
@@ -125,7 +125,7 @@ export function BottomNavigation() {
                 onClick={(event) => {
                   onNavigate(event, tab.id);
                 }}
-                className="flex min-h-14 items-center justify-center rounded-control focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="flex min-h-14 w-full items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
                 <span
                   className={

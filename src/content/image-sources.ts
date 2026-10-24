@@ -53,10 +53,10 @@ export const imageSources = [
   {
     file: "/images/gallery/dental-team-in-treatment-room.webp",
     depicts: "Two dental professionals treating a patient in a white treatment room.",
-    usedFor: "Photo gallery, lead photograph",
+    usedFor: "Photo gallery, wide lead photograph",
     photographer: "Anna Shvets",
     notes:
-      "Cropped to a 3:2 view that keeps both clinicians, the chair, and part of the wall mirror.",
+      "Cropped to a 2:1 view that keeps both clinicians, the chair, and the wall mirror.",
     sourceUrl:
       "https://www.pexels.com/photo/female-dentist-and-assistant-examining-patients-teeth-in-clinic-3845981/",
     license: "Pexels License",

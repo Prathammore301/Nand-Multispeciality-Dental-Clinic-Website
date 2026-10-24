@@ -44,7 +44,7 @@ export function FaqSection() {
           {questions.map((item) => (
             <div
               key={item.question}
-              className="grid gap-2 border-b border-line py-5 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-12 lg:py-6"
+              className="grid min-w-0 gap-2 border-b border-line py-5 lg:grid-cols-[minmax(12rem,0.8fr)_minmax(0,1.2fr)] lg:gap-12 lg:py-6"
             >
               <dt className="font-serif text-xl leading-snug text-ink">{item.question}</dt>
               <dd className="text-base leading-7 text-muted">{item.answer}</dd>

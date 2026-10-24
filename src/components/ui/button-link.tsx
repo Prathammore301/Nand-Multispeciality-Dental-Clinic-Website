@@ -14,7 +14,7 @@ export function buttonClassName(
   className?: string,
 ): string {
   return cx(
-    "inline-flex min-h-12 items-center justify-center rounded-control px-5 py-3 text-center text-sm font-semibold transition-colors duration-150",
+    "inline-flex min-h-12 items-center justify-center px-5 py-3 text-center text-sm font-semibold transition-colors duration-150",
     variants[variant],
     className,
   );

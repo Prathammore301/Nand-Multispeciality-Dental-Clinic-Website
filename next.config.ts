@@ -9,6 +9,7 @@ import type { NextConfig } from "next";
  * where React uses it for debugging. `upgrade-insecure-requests` is omitted
  * because Vercel already redirects HTTP to HTTPS, and the directive breaks
  * a local `next start` server that is served over HTTP.
+ * Frames are limited to Google Maps embed hosts.
  */
 function contentSecurityPolicy(): string {
   const isDev = process.env.NODE_ENV === "development";
@@ -28,7 +29,7 @@ function contentSecurityPolicy(): string {
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'none'",
-    "frame-src 'none'",
+    "frame-src https://www.google.com https://maps.google.com",
     "frame-ancestors 'none'",
     "worker-src 'self'",
     "manifest-src 'self'",

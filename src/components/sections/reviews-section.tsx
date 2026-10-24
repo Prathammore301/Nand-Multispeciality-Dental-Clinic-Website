@@ -4,6 +4,7 @@ import { getVerifiedRating, toSafeGoogleHref } from "@/lib/utils";
 
 export function ReviewsSection() {
   const reviewsHref = toSafeGoogleHref(clinic.googleReviewsUrl);
+  const mapsHref = toSafeGoogleHref(clinic.googleMapsUrl);
   const rating = getVerifiedRating(clinic.rating);
 
   return (
@@ -13,21 +14,24 @@ export function ReviewsSection() {
       tabIndex={-1}
       className="bg-accent-strong text-on-accent"
     >
-      <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(16rem,0.65fr)] lg:items-center lg:py-24">
+      <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.75fr)] lg:items-center lg:py-24">
         <div className="min-w-0">
           <p className="text-sm font-semibold tracking-[0.16em] text-on-accent-muted uppercase">
-            Google reviews
+            Patient feedback
           </p>
           <h2
             id="reviews-heading"
-            className="mt-3 max-w-xl font-serif text-3xl leading-tight sm:text-5xl"
+            className="mt-3 max-w-xl font-serif text-4xl leading-tight sm:text-5xl"
           >
-            Read what patients have shared
+            Google Reviews
           </h2>
           <p className="mt-5 max-w-xl text-base leading-7 text-on-accent-muted sm:text-lg sm:leading-8">
-            {reviewsHref
-              ? "Reviews stay on the clinic’s Google profile. This page links to that profile and does not copy the wording."
-              : "Patient reviews stay on Google. This page does not copy them."}
+            Patients leave feedback on the clinic’s Google Business Profile. This page links to
+            that profile. It does not copy the wording, and it does not display a rating.
+          </p>
+          <p className="mt-4 max-w-xl text-base leading-7 text-on-accent-muted">
+            Google publishes the reviews. A link from this website does not mean Google endorses
+            the clinic.
           </p>
           {rating ? (
             <p className="mt-5 text-base text-on-accent">
@@ -37,15 +41,23 @@ export function ReviewsSection() {
           ) : null}
         </div>
         {reviewsHref ? (
-          <div className="rounded-panel border border-white/20 p-6 sm:p-8">
-            <p className="font-serif text-2xl leading-tight">On Google</p>
+          <div className="min-w-0 border border-white/15 p-6 sm:p-8">
+            <p className="text-sm font-semibold tracking-[0.16em] text-on-accent-muted uppercase">
+              Google
+            </p>
+            <p className="mt-3 font-serif text-3xl leading-tight">Read the public reviews</p>
             <p className="mt-3 text-sm leading-6 text-on-accent-muted">
               Opens the clinic’s Google profile in a new tab.
             </p>
-            <div className="mt-6">
-              <ButtonLink href={reviewsHref} external variant="inverse" className="w-full sm:w-auto">
-                View Google reviews
+            <div className="mt-6 flex flex-col gap-3">
+              <ButtonLink href={reviewsHref} external variant="inverse" className="w-full">
+                Read Google Reviews
               </ButtonLink>
+              {mapsHref ? (
+                <ButtonLink href={mapsHref} external variant="inverse" className="w-full">
+                  View on Google Maps
+                </ButtonLink>
+              ) : null}
             </div>
           </div>
         ) : null}

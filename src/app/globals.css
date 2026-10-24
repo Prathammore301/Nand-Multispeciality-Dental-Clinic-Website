@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f3efe7;
+  --surface: #fbf8f3;
+  --ink: #1c2421;
+  --muted: #3e4a45;
+  --line: #ddd4c8;
+  --accent: #0f4f56;
+  --accent-strong: #0b3c41;
+  --accent-soft: #e4f0ee;
+  --on-accent: #f7f3ec;
+  --on-accent-muted: #d5e4e1;
+  --pending-bg: #f6ecdf;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+  --color-on-accent-muted: var(--on-accent-muted);
+  --color-pending-bg: var(--pending-bg);
+  --font-sans: var(--font-source-sans), "Segoe UI", sans-serif;
+  --font-serif: var(--font-source-serif), Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+main section[id] {
+  scroll-margin-top: 6.75rem;
+}
+
+::selection {
+  background: #c9e3df;
+  color: var(--ink);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+footer a:focus-visible {
+  outline-color: var(--on-accent);
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 60;
+  transform: translateY(-160%);
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

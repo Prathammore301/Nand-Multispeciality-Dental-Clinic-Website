@@ -30,10 +30,10 @@ export function ContactSection() {
   return (
     <section id="contact" aria-labelledby="contact-heading" tabIndex={-1}>
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 lg:py-24">
-        <div className="grid overflow-hidden border border-line lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div className="grid overflow-hidden rounded-panel border border-line lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <div className="bg-accent-strong px-6 py-10 text-on-accent sm:px-10 sm:py-14">
             <p className="text-sm font-semibold tracking-[0.16em] text-on-accent-muted uppercase">
-              Visit or call
+              {callHref || address ? "Visit or call" : "Get in touch"}
             </p>
             <h2 id="contact-heading" className="mt-3 font-serif text-4xl leading-tight sm:text-5xl">
               Contact the clinic

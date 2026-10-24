@@ -37,7 +37,7 @@ export function ReviewsSection() {
           ) : null}
         </div>
         {reviewsHref ? (
-          <div className="border border-white/15 p-6 sm:p-8">
+          <div className="rounded-panel border border-white/20 p-6 sm:p-8">
             <p className="font-serif text-2xl leading-tight">On Google</p>
             <p className="mt-3 text-sm leading-6 text-on-accent-muted">
               Opens the clinic’s Google profile in a new tab.

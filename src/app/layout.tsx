@@ -1,5 +1,6 @@
 import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
 
+import { BottomNavigation } from "@/components/layout/bottom-navigation";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { siteMetadata } from "@/lib/metadata";
@@ -31,7 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${sourceSans.variable} ${sourceSerif.variable} h-full antialiased`}
     >
-      <body className="flex min-h-dvh flex-col">
+      <body className="flex min-h-dvh flex-col pb-[calc(5.75rem+env(safe-area-inset-bottom))] lg:pb-0">
         <a href="#main" className="skip-link">
           Skip to content
         </a>
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <SiteFooter />
+        <BottomNavigation />
         {/* Serialized with escaping so clinic text cannot close the script element. */}
         {jsonLd ? <JsonLd data={jsonLd} /> : null}
       </body>

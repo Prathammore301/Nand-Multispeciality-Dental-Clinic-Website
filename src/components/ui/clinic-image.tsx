@@ -78,7 +78,7 @@ export function FramedPhotograph({
 }) {
   return (
     <figure>
-      <div className={cx("relative overflow-hidden border border-line bg-accent-soft", ratio)}>
+      <div className={cx("relative overflow-hidden rounded-panel border border-line bg-accent-soft", ratio)}>
         <ClinicImage image={image} fill priority={priority} sizes={sizes} />
       </div>
       {caption ? (

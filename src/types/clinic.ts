@@ -11,6 +11,7 @@ export type DentistProfile = {
 export type ClinicAddress = {
   line1: string | null;
   line2: string | null;
+  area: string | null;
   city: string | null;
   region: string | null;
   postalCode: string | null;
@@ -53,6 +54,8 @@ export type VerifiedRating = {
 
 export type ClinicConfig = {
   name: string;
+  /** Public practice name used in body copy. The header keeps `name`. */
+  listedName: string;
   tagline: string | null;
   description: string | null;
   phone: string | null;
@@ -60,6 +63,8 @@ export type ClinicConfig = {
   address: ClinicAddress;
   openingHours: readonly OpeningHours[];
   googleMapsUrl: string | null;
+  /** Embed URL for the resolved Maps pin. Short links are not embeddable. */
+  googleMapsEmbedUrl: string | null;
   googleReviewsUrl: string | null;
   rating: VerifiedRating | null;
   services: readonly DentalService[];

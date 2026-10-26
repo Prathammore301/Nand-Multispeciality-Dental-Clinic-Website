@@ -1,31 +1,18 @@
 import { clinic, routes } from "@/config/clinic";
 import { FramedPhotograph } from "@/components/ui/clinic-image";
 import { ButtonLink } from "@/components/ui/button-link";
+import { homeCopy } from "@/content/site-copy";
 import { stockPhotographNotice } from "@/content/image-sources";
-import { cx, formatAddress, formatOpeningHours, toTelHref } from "@/lib/utils";
-
-const visitNotes = [
-  {
-    title: "Before the visit",
-    body: "A checkup lets a dentist look at your teeth and gums and explain what they see.",
-  },
-  {
-    title: "Questions to ask",
-    body: "Ask what the visit involves, and which options fit an examination, before treatment begins.",
-  },
-  {
-    title: "Google profile",
-    body: "Patient reviews and the public listing stay on Google. This page links to them.",
-  },
-] as const;
+import { cx, formatLocality, formatOpeningHours, toSafeGoogleHref, toTelHref } from "@/lib/utils";
 
 export function HeroSection() {
   const callHref = toTelHref(clinic.phone);
-  const address = formatAddress(clinic.address);
+  const directionsHref = toSafeGoogleHref(clinic.googleMapsUrl);
+  const locality = formatLocality(clinic.address);
   const hours = formatOpeningHours(clinic.openingHours);
   const showPhone = Boolean(callHref && clinic.phone);
   const showHours = Boolean(hours);
-  const showAddress = Boolean(address);
+  const showAddress = Boolean(locality);
   const factCount = Number(showPhone) + Number(showHours) + Number(showAddress);
 
   return (
@@ -37,24 +24,27 @@ export function HeroSection() {
           </p>
           <h1 id="home-heading" className="mt-4 max-w-xl text-ink">
             <span className="block text-balance font-serif text-[1.85rem] leading-[1.15] min-[380px]:text-[2.15rem] sm:text-5xl lg:text-[3.25rem] lg:leading-[1.08]">
-              Read about your visit before you come in
+              {homeCopy.headline}
             </span>
             <span className="mt-4 block max-w-lg text-base font-semibold leading-7 text-accent sm:text-lg">
-              {clinic.name}
+              {clinic.listedName}
             </span>
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-muted">
-            Use this page to see how a dental visit is described, then open the clinic’s Google
-            profile. A dentist explains suitable options after an examination. This website does
-            not book appointments.
-          </p>
+          <p className="mt-6 max-w-xl text-lg leading-8 text-muted">{homeCopy.subtitle}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <ButtonLink href={routes.contact} className="w-full sm:w-auto">
-              Contact the clinic
+            <ButtonLink href={callHref ?? routes.contact} className="w-full sm:w-auto">
+              Call the Clinic
             </ButtonLink>
-            <ButtonLink href={routes.services} variant="secondary" className="w-full sm:w-auto">
-              Read about dental care
-            </ButtonLink>
+            {directionsHref ? (
+              <ButtonLink
+                href={directionsHref}
+                external
+                variant="secondary"
+                className="w-full sm:w-auto"
+              >
+                Get Directions
+              </ButtonLink>
+            ) : null}
           </div>
         </div>
         {clinic.heroImage ? (
@@ -69,7 +59,7 @@ export function HeroSection() {
       </div>
       <div className="border-y border-line bg-surface">
         <ul className="mx-auto grid w-full max-w-6xl sm:grid-cols-3">
-          {visitNotes.map((note, index) => (
+          {homeCopy.visitNotes.map((note, index) => (
             <li
               key={note.title}
               className={cx(
@@ -112,12 +102,12 @@ export function HeroSection() {
                 <dd className="mt-2 text-lg">{hours}</dd>
               </div>
             ) : null}
-            {showAddress ? (
+            {showAddress && locality ? (
               <div className="px-5 py-5 sm:px-8">
                 <dt className="text-xs font-semibold tracking-[0.14em] text-muted uppercase">
                   Location
                 </dt>
-                <dd className="mt-2 text-lg">{address}</dd>
+                <dd className="mt-2 text-lg">{locality}</dd>
               </div>
             ) : null}
           </dl>

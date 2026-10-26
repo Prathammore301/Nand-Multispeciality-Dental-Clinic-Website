@@ -29,7 +29,9 @@ export function getDentalClinicJsonLd(): Record<string, unknown> | null {
 
   const address: Record<string, string> = {
     "@type": "PostalAddress",
-    streetAddress: [street, clinic.address.line2?.trim()].filter(Boolean).join(", "),
+    streetAddress: [street, clinic.address.line2?.trim(), clinic.address.area?.trim()]
+      .filter(Boolean)
+      .join(", "),
     addressLocality: city,
   };
 

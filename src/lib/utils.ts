@@ -99,19 +99,32 @@ export function isLocalImagePath(src: string): boolean {
   );
 }
 
-export function formatAddress(address: ClinicAddress): string | null {
-  const parts = [
-    address.line1,
-    address.line2,
-    address.city,
-    address.region,
-    address.postalCode,
-    address.country,
-  ]
+export function formatLocality(address: ClinicAddress): string | null {
+  const area = address.area?.trim() ?? "";
+  const city = address.city?.trim() ?? "";
+  const locality = [area, city].filter((part) => part.length > 0).join(", ");
+  return locality.length > 0 ? locality : null;
+}
+
+export function formatAddressLines(address: ClinicAddress): string[] {
+  const lines = [address.line1, address.line2]
     .map((part) => part?.trim() ?? "")
     .filter((part) => part.length > 0);
+  const place = [address.area, address.city, address.region]
+    .map((part) => part?.trim() ?? "")
+    .filter((part) => part.length > 0)
+    .join(", ");
+  const postalCode = address.postalCode?.trim() ?? "";
+  const last = [place, postalCode].filter((part) => part.length > 0).join(" - ");
+  if (last.length > 0) {
+    lines.push(last);
+  }
+  return lines;
+}
 
-  return parts.length > 0 ? parts.join(", ") : null;
+export function formatAddress(address: ClinicAddress): string | null {
+  const lines = formatAddressLines(address);
+  return lines.length > 0 ? lines.join(", ") : null;
 }
 
 export function formatOpeningHours(hours: readonly OpeningHours[]): string | null {

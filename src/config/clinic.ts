@@ -6,49 +6,58 @@ import type { ClinicConfig, NavItem } from "@/types/clinic";
  * Leave unknown fields null or empty. Do not add sample phone numbers,
  * addresses, hours, credentials, testimonials, ratings, or treatments.
  *
- * The share link below was supplied as a Google Business Profile reference.
- * A plain request did not resolve it to a Maps place, so it is not used as
- * the directions link and it is not treated as a verified rating source.
+ * On 26 Oct 2026 the supplied Maps link
+ * https://maps.app.goo.gl/pWD3TNHeqSPnvLoZ8 redirected to a Google place
+ * titled “Nand Multispeciality” at 22.337236, 73.1918886. Directions and
+ * the map use that pin. The street address below is the address supplied
+ * for publication; the clinic still needs to confirm it, including the
+ * postal code. No rating was read from the listing.
  *
- * A third-party page describes a Vadodara clinic with a similar name. That
- * page was not confirmed as this project’s Google profile, so its address,
- * hours, rating, dentist name, and treatment wording are not published here.
+ * https://jsdl.in/DT-59T5OIZHD9F pointed at Justdial and then returned
+ * access denied, so that directory link is not published.
+ *
+ * Dr. Apexa Tuvar is named because a public directory lists her with this
+ * clinic. Degrees, specialist titles, and experience are not published.
  *
  * Indexing stays off for previews. For the real production domain, set
  * `siteUrl` to the https origin and set `indexing.enabled` to true. Until
  * both are set, robots.txt disallows crawling, the sitemap is empty, and
  * pages send noindex. Do not invent a domain to turn indexing on.
  *
- * A map is shown only when `googleMapsUrl` is an https Google Maps embed
- * URL. The share link is not an embed and is not a directions link.
+ * A map is shown only from `googleMapsEmbedUrl`. The short Maps link is
+ * the directions and reviews destination, not an embed.
  *
- * Still required before launch: street address, verified Maps place URL,
- * phone, opening hours, dentist name and qualifications if they should be
- * shown, confirmed treatments, official photographs or reuse permission,
- * and the production https domain. Tracking IDs stay empty until the
- * clinic supplies them and a privacy notice is in place.
+ * Still required before launch: clinic confirmation of the street address
+ * and postal code, phone, opening hours, qualifications if they should be
+ * shown, a confirmed treatment list, official photographs or reuse
+ * permission, and the production https domain. Tracking IDs stay empty
+ * until the clinic supplies them and a privacy notice is in place.
  */
 export const clinic: ClinicConfig = {
   name: "Nand Multispeciality Dental Clinic",
-  tagline: "Dental care",
+  listedName: "Nand Multispeciality Dental Clinic & Implant Center",
+  tagline: "Dental care in New Sama, Vadodara",
   description:
-    "Nand Multispeciality Dental Clinic is a dental practice. This website helps patients read about the clinic, look at photographs of dental care, and open the public Google profile before getting in touch.",
+    "Nand Multispeciality Dental Clinic & Implant Center is listed in New Sama, Vadodara. This website explains how a dental consultation is discussed and how to find the clinic.",
   phone: null,
   dentist: {
-    name: null,
+    name: "Dr. Apexa Tuvar",
     qualifications: null,
   },
   address: {
-    line1: null,
-    line2: null,
-    city: null,
-    region: null,
-    postalCode: null,
-    country: null,
+    line1: "103, Ansh Complex, 7 Vasant Vihar Society",
+    line2: "Chanakyapuri Road, Opposite GIPCL Circle",
+    area: "New Sama",
+    city: "Vadodara",
+    region: "Gujarat",
+    postalCode: "390024",
+    country: "India",
   },
   openingHours: [],
-  googleMapsUrl: null,
-  googleReviewsUrl: "https://share.google/ALv6DJhtud0ik8I9A",
+  googleMapsUrl: "https://maps.app.goo.gl/pWD3TNHeqSPnvLoZ8",
+  googleMapsEmbedUrl:
+    "https://maps.google.com/maps?q=22.337236,73.1918886&z=16&output=embed",
+  googleReviewsUrl: "https://maps.app.goo.gl/pWD3TNHeqSPnvLoZ8",
   rating: null,
   services: [],
   heroImage: {
@@ -103,7 +112,7 @@ export const clinic: ClinicConfig = {
   indexing: {
     enabled: false,
   },
-  contentRevisedOn: "2026-10-25",
+  contentRevisedOn: "2026-10-26",
 };
 
 export const routes = {
@@ -112,6 +121,7 @@ export const routes = {
   services: "/services",
   gallery: "/gallery",
   contact: "/contact",
+  doctors: "/doctors",
   guide: "/#guide",
   questions: "/#faq",
   reviews: "/#reviews",
@@ -123,6 +133,7 @@ export const publicPaths = [
   routes.services,
   routes.gallery,
   routes.contact,
+  routes.doctors,
 ] as const;
 
 export const navigation = [
@@ -133,5 +144,4 @@ export const navigation = [
   { href: routes.contact, label: "Contact" },
 ] as const satisfies readonly NavItem[];
 
-export const siteDescription =
-  "Nand Multispeciality Dental Clinic. Read how a dental visit is described, see photographs of dental care, and open the clinic’s Google profile.";
+export const siteDescription = clinic.description ?? clinic.name;

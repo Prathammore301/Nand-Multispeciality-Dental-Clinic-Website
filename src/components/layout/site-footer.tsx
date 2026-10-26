@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 import { clinic, routes } from "@/config/clinic";
-import { formatAddress, formatOpeningHours, toSafeGoogleHref, toTelHref } from "@/lib/utils";
+import { formatAddressLines, formatOpeningHours, toSafeGoogleHref, toTelHref } from "@/lib/utils";
 
 export function SiteFooter() {
   const callHref = toTelHref(clinic.phone);
-  const address = formatAddress(clinic.address);
+  const addressLines = formatAddressLines(clinic.address);
   const hours = formatOpeningHours(clinic.openingHours);
   const mapsHref = toSafeGoogleHref(clinic.googleMapsUrl);
   const reviewsHref = toSafeGoogleHref(clinic.googleReviewsUrl);
@@ -13,6 +13,7 @@ export function SiteFooter() {
   const footerLinks = [
     { href: routes.home, label: "Home" },
     { href: routes.about, label: "About" },
+    { href: routes.doctors, label: "Dentist" },
     { href: routes.services, label: "Services" },
     { href: routes.guide, label: "Guide" },
     { href: routes.questions, label: "Questions" },
@@ -25,12 +26,12 @@ export function SiteFooter() {
     <footer className="bg-accent-strong text-on-accent">
       <div className="mx-auto grid w-full max-w-6xl gap-12 px-5 py-14 sm:px-8 md:grid-cols-12 lg:py-16">
         <div className="md:col-span-5">
-          <p className="font-serif text-3xl leading-tight">{clinic.name}</p>
+          <p className="font-serif text-3xl leading-tight">{clinic.listedName}</p>
           <p className="mt-2 text-xs font-semibold tracking-[0.16em] text-on-accent-muted uppercase">
             Dental clinic
           </p>
           <p className="mt-5 max-w-sm text-sm leading-6 text-on-accent-muted">
-            A patient guide to the clinic. Appointments and payments are not taken on this page.
+            Listed in New Sama, Vadodara. This website does not take appointments or payments.
           </p>
         </div>
         <nav aria-label="Footer" className="md:col-span-3">
@@ -65,7 +66,15 @@ export function SiteFooter() {
                 {clinic.phone}
               </a>
             ) : null}
-            {address ? <p>{address}</p> : null}
+            {addressLines.length > 0 ? (
+              <p>
+                {addressLines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </p>
+            ) : null}
             {hours ? <p>{hours}</p> : null}
             {mapsHref ? (
               <a
@@ -74,7 +83,7 @@ export function SiteFooter() {
                 rel="noopener noreferrer"
                 className="block underline decoration-white/40 underline-offset-4 transition-colors duration-150 hover:text-on-accent"
               >
-                Directions
+                Get Directions
                 <span className="sr-only"> (opens in a new tab)</span>
               </a>
             ) : null}
@@ -85,7 +94,7 @@ export function SiteFooter() {
                 rel="noopener noreferrer"
                 className="block underline decoration-white/40 underline-offset-4 transition-colors duration-150 hover:text-on-accent"
               >
-                Google profile
+                Google reviews
                 <span className="sr-only"> (opens in a new tab)</span>
               </a>
             ) : null}

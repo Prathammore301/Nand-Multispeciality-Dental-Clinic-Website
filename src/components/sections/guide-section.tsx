@@ -1,27 +1,5 @@
 import { SectionHeading } from "@/components/ui/section-heading";
-
-const steps = [
-  {
-    number: "01",
-    title: "Before you leave home",
-    body: "Write the reason for the visit in one or two sentences. List the medicines and supplements you take, including ones bought without a prescription. If another clinic gave you recent dental images and you were asked to share them, bring those too.",
-  },
-  {
-    number: "02",
-    title: "Questions worth asking",
-    body: "Ask what the dentist saw, what a suggested treatment is meant to do, what the other choices are, and how long to allow. If the situation is not urgent, you can ask for time to decide.",
-  },
-  {
-    number: "03",
-    title: "What to say about your health",
-    body: "Mention allergies, pregnancy, conditions that affect bleeding or the heart, diabetes, and any change in your health. Also mention medicines that affect bleeding or bone. This is information for the dentist. It is not a checklist that decides your care.",
-  },
-  {
-    number: "04",
-    title: "How to read a recommendation",
-    body: "A recommendation is advice given after an examination. Ask for the reason in plain language, and ask what happens if you wait. This website cannot tell you which option is suitable, and it cannot promise a result.",
-  },
-] as const;
+import { guideSteps } from "@/content/site-copy";
 
 export function GuideSection() {
   return (
@@ -32,10 +10,10 @@ export function GuideSection() {
           title="Prepare for a consultation"
           titleId="guide-heading"
         >
-          A short list is more useful than trying to remember everything in the chair.
+          A few notes can make a consultation easier to follow. They do not replace an examination.
         </SectionHeading>
         <ol className="mt-10 max-w-3xl border-t border-line">
-          {steps.map((step) => (
+          {guideSteps.map((step) => (
             <li
               key={step.number}
               className="grid grid-cols-[2.75rem_minmax(0,1fr)] gap-4 border-b border-line py-6 sm:grid-cols-[4rem_minmax(0,1fr)] sm:gap-6"

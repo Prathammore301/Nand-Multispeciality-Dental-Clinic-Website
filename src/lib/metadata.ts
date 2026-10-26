@@ -22,12 +22,7 @@ export const siteMetadata: Metadata = {
   robots: isReadyForIndexing()
     ? { index: true, follow: true }
     : { index: false, follow: false },
-  ...(origin
-    ? {
-        metadataBase: new URL(origin),
-        alternates: { canonical: "/" },
-      }
-    : {}),
+  ...(origin ? { metadataBase: new URL(origin) } : {}),
   openGraph: {
     title: clinic.name,
     description: siteDescription,
@@ -42,3 +37,31 @@ export const siteMetadata: Metadata = {
     description: siteDescription,
   },
 };
+
+export function pageMetadata({
+  title,
+  description,
+  path,
+}: {
+  title?: string;
+  description: string;
+  path: string;
+}): Metadata {
+  const pageOrigin = toSiteOrigin(clinic.siteUrl);
+  const socialTitle = title ? `${title} | ${clinic.name}` : clinic.name;
+
+  return {
+    ...(title ? { title } : {}),
+    description,
+    openGraph: {
+      title: socialTitle,
+      description,
+      ...(pageOrigin ? { url: new URL(path, pageOrigin).toString() } : {}),
+    },
+    twitter: {
+      title: socialTitle,
+      description,
+    },
+    ...(pageOrigin ? { alternates: { canonical: path } } : {}),
+  };
+}

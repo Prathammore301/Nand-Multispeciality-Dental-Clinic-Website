@@ -1,5 +1,6 @@
 import { clinic } from "@/config/clinic";
 import { ButtonLink } from "@/components/ui/button-link";
+import { reviewsCopy } from "@/content/site-copy";
 import { getVerifiedRating, toSafeGoogleHref } from "@/lib/utils";
 
 export function ReviewsSection() {
@@ -23,15 +24,10 @@ export function ReviewsSection() {
             id="reviews-heading"
             className="mt-3 max-w-xl font-serif text-4xl leading-tight sm:text-5xl"
           >
-            Google Reviews
+            {reviewsCopy.title}
           </h2>
           <p className="mt-5 max-w-xl text-base leading-7 text-on-accent-muted sm:text-lg sm:leading-8">
-            Patients leave feedback on the clinic’s Google Business Profile. This page links to
-            that profile. It does not copy the wording, and it does not display a rating.
-          </p>
-          <p className="mt-4 max-w-xl text-base leading-7 text-on-accent-muted">
-            Google publishes the reviews. A link from this website does not mean Google endorses
-            the clinic.
+            {reviewsCopy.body}
           </p>
           {rating ? (
             <p className="mt-5 text-base text-on-accent">
@@ -45,15 +41,15 @@ export function ReviewsSection() {
             <p className="text-sm font-semibold tracking-[0.16em] text-on-accent-muted uppercase">
               Google
             </p>
-            <p className="mt-3 font-serif text-3xl leading-tight">Read the public reviews</p>
+            <p className="mt-3 font-serif text-3xl leading-tight">Google reviews</p>
             <p className="mt-3 text-sm leading-6 text-on-accent-muted">
-              Opens the clinic’s Google profile in a new tab.
+              Opens the clinic’s Google listing in a new tab.
             </p>
             <div className="mt-6 flex flex-col gap-3">
               <ButtonLink href={reviewsHref} external variant="inverse" className="w-full">
-                Read Google Reviews
+                {reviewsCopy.action}
               </ButtonLink>
-              {mapsHref ? (
+              {mapsHref && mapsHref !== reviewsHref ? (
                 <ButtonLink href={mapsHref} external variant="inverse" className="w-full">
                   View on Google Maps
                 </ButtonLink>

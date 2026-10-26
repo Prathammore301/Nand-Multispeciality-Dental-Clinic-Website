@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { clinic } from "@/config/clinic";
+import { clinic, publicPaths } from "@/config/clinic";
 import { toSiteOrigin } from "@/lib/utils";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -11,12 +11,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const lastModified = new Date(`${clinic.contentRevisedOn}T00:00:00.000Z`);
 
-  return [
-    {
-      url: origin,
-      lastModified: Number.isNaN(lastModified.valueOf()) ? undefined : lastModified,
-      changeFrequency: "monthly",
-      priority: 1,
-    },
-  ];
+  return publicPaths.map((path) => ({
+    url: new URL(path, origin).toString(),
+    lastModified: Number.isNaN(lastModified.valueOf()) ? undefined : lastModified,
+    changeFrequency: "monthly",
+    priority: path === "/" ? 1 : 0.7,
+  }));
 }

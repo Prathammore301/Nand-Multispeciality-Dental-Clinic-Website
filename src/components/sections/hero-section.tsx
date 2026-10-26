@@ -1,4 +1,4 @@
-import { clinic } from "@/config/clinic";
+import { clinic, routes } from "@/config/clinic";
 import { FramedPhotograph } from "@/components/ui/clinic-image";
 import { ButtonLink } from "@/components/ui/button-link";
 import { stockPhotographNotice } from "@/content/image-sources";
@@ -49,10 +49,10 @@ export function HeroSection() {
             not book appointments.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <ButtonLink href="/#contact" className="w-full sm:w-auto">
+            <ButtonLink href={routes.contact} className="w-full sm:w-auto">
               Contact the clinic
             </ButtonLink>
-            <ButtonLink href="/#services" variant="secondary" className="w-full sm:w-auto">
+            <ButtonLink href={routes.services} variant="secondary" className="w-full sm:w-auto">
               Read about dental care
             </ButtonLink>
           </div>

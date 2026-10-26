@@ -17,7 +17,7 @@ const practiceNotes = [
   },
 ] as const;
 
-export function AboutSection() {
+export function AboutSection({ headingLevel = 2 }: { headingLevel?: 1 | 2 }) {
   const dentistName = clinic.dentist.name?.trim() || null;
   const qualifications = clinic.dentist.qualifications?.trim() || null;
 
@@ -34,7 +34,12 @@ export function AboutSection() {
           </div>
         ) : null}
         <div className="order-1 min-w-0 lg:order-2 lg:col-span-7">
-          <SectionHeading eyebrow="The practice" title="About the clinic" titleId="about-heading" />
+          <SectionHeading
+            eyebrow="The practice"
+            title="About the clinic"
+            titleId="about-heading"
+            level={headingLevel}
+          />
           <div className="mt-5 max-w-xl space-y-4 text-base leading-7 text-muted sm:text-lg sm:leading-8">
             <p>
               {clinic.description ??

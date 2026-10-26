@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { clinic } from "@/config/clinic";
+import { clinic, routes } from "@/config/clinic";
 import { formatAddress, formatOpeningHours, toSafeGoogleHref, toTelHref } from "@/lib/utils";
 
 export function SiteFooter() {
@@ -11,14 +11,14 @@ export function SiteFooter() {
   const reviewsHref = toSafeGoogleHref(clinic.googleReviewsUrl);
   const year = new Date().getFullYear();
   const footerLinks = [
-    { href: "/#top", label: "Home" },
-    { href: "/#about", label: "About" },
-    { href: "/#services", label: "Services" },
-    { href: "/#guide", label: "Guide" },
-    { href: "/#faq", label: "Questions" },
-    { href: "/#gallery", label: "Gallery" },
-    { href: "/#reviews", label: "Reviews" },
-    { href: "/#contact", label: "Contact" },
+    { href: routes.home, label: "Home" },
+    { href: routes.about, label: "About" },
+    { href: routes.services, label: "Services" },
+    { href: routes.guide, label: "Guide" },
+    { href: routes.questions, label: "Questions" },
+    { href: routes.gallery, label: "Gallery" },
+    { href: routes.reviews, label: "Reviews" },
+    { href: routes.contact, label: "Contact" },
   ];
 
   return (
@@ -34,16 +34,25 @@ export function SiteFooter() {
           </p>
         </div>
         <nav aria-label="Footer" className="md:col-span-3">
-          <p className="text-xs font-semibold tracking-[0.16em] uppercase">On this page</p>
+          <p className="text-xs font-semibold tracking-[0.16em] uppercase">Pages</p>
           <ul className="mt-5 space-y-2.5">
             {footerLinks.map((item) => (
               <li key={item.href}>
-                <a
-                  href={item.href}
-                  className="text-sm text-on-accent-muted underline-offset-4 transition-colors duration-150 hover:text-on-accent hover:underline"
-                >
-                  {item.label}
-                </a>
+                {item.href.includes("#") ? (
+                  <a
+                    href={item.href}
+                    className="text-sm text-on-accent-muted underline-offset-4 transition-colors duration-150 hover:text-on-accent hover:underline"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className="text-sm text-on-accent-muted underline-offset-4 transition-colors duration-150 hover:text-on-accent hover:underline"
+                  >
+                    {item.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
@@ -88,9 +97,9 @@ export function SiteFooter() {
           <p>
             © {year} {clinic.name}
           </p>
-          <Link href="/#top" className="underline-offset-4 hover:text-on-accent hover:underline">
+          <a href="#main" className="underline-offset-4 hover:text-on-accent hover:underline">
             Back to top
-          </Link>
+          </a>
         </div>
       </div>
     </footer>

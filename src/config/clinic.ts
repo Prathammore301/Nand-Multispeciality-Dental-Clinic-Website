@@ -106,12 +106,31 @@ export const clinic: ClinicConfig = {
   contentRevisedOn: "2026-10-25",
 };
 
+export const routes = {
+  home: "/",
+  about: "/about",
+  services: "/services",
+  gallery: "/gallery",
+  contact: "/contact",
+  guide: "/#guide",
+  questions: "/#faq",
+  reviews: "/#reviews",
+} as const;
+
+export const publicPaths = [
+  routes.home,
+  routes.about,
+  routes.services,
+  routes.gallery,
+  routes.contact,
+] as const;
+
 export const navigation = [
-  { href: "/#about", label: "About" },
-  { href: "/#services", label: "Services" },
-  { href: "/#gallery", label: "Gallery" },
-  { href: "/#reviews", label: "Reviews" },
-  { href: "/#contact", label: "Contact" },
+  { href: routes.about, label: "About" },
+  { href: routes.services, label: "Services" },
+  { href: routes.gallery, label: "Gallery" },
+  { href: routes.reviews, label: "Reviews" },
+  { href: routes.contact, label: "Contact" },
 ] as const satisfies readonly NavItem[];
 
 export const siteDescription =

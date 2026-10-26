@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { clinic, navigation } from "@/config/clinic";
+import { clinic, navigation, routes } from "@/config/clinic";
 import { ButtonLink } from "@/components/ui/button-link";
 import { toTelHref } from "@/lib/utils";
 
@@ -25,15 +25,25 @@ export function SiteHeader() {
         </Link>
         <div className="flex items-center gap-2 sm:gap-5">
           <nav aria-label="Primary" className="hidden items-center gap-8 xl:flex">
-            {navigation.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-sm font-medium text-muted transition-colors duration-150 hover:text-accent"
-              >
-                {item.label}
-              </a>
-            ))}
+            {navigation.map((item) =>
+              item.href.includes("#") ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm font-medium text-muted transition-colors duration-150 hover:text-accent"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm font-medium text-muted transition-colors duration-150 hover:text-accent"
+                >
+                  {item.label}
+                </Link>
+              ),
+            )}
           </nav>
           {callHref ? (
             <div className="hidden sm:flex">
@@ -43,7 +53,7 @@ export function SiteHeader() {
             </div>
           ) : (
             <div className="hidden xl:flex">
-              <ButtonLink href="/#contact" className="px-4">
+              <ButtonLink href={routes.contact} className="px-4">
                 Contact
               </ButtonLink>
             </div>

@@ -22,7 +22,7 @@ const guidance = [
   },
 ] as const;
 
-export function ServicesSection() {
+export function ServicesSection({ headingLevel = 2 }: { headingLevel?: 1 | 2 }) {
   const services = getConfirmedServices(clinic.services);
   const [feature, ...supporting] = guidance;
 
@@ -30,7 +30,12 @@ export function ServicesSection() {
     <section id="services" aria-labelledby="services-heading" tabIndex={-1}>
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 lg:py-24">
         <div className="max-w-2xl">
-          <SectionHeading eyebrow="Care" title="Dental services" titleId="services-heading">
+          <SectionHeading
+            eyebrow="Care"
+            title="Dental services"
+            titleId="services-heading"
+            level={headingLevel}
+          >
             {services.length > 0
               ? "These are the treatments the clinic has described. A dentist still needs to examine you before recommending care."
               : "The notes below are general information about checkups and the questions worth asking. They are not a diagnosis, and they are not a list of treatments offered by this clinic."}

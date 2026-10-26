@@ -3,7 +3,7 @@ import { FramedPhotograph } from "@/components/ui/clinic-image";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { isLocalImagePath } from "@/lib/utils";
 
-export function GallerySection() {
+export function GallerySection({ headingLevel = 2 }: { headingLevel?: 1 | 2 }) {
   const images = clinic.gallery.filter(
     (image) => isLocalImagePath(image.src) && image.placeholder !== true,
   );
@@ -12,7 +12,12 @@ export function GallerySection() {
   return (
     <section id="gallery" aria-labelledby="gallery-heading" tabIndex={-1} className="bg-surface">
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 lg:py-24">
-        <SectionHeading eyebrow="Photographs" title="Photo gallery" titleId="gallery-heading">
+        <SectionHeading
+          eyebrow="Photographs"
+          title="Photo gallery"
+          titleId="gallery-heading"
+          level={headingLevel}
+        >
           {images.length > 0
             ? "These photographs show dental care in general. They are not photographs of this clinic."
             : undefined}

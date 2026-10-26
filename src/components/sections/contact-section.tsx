@@ -38,7 +38,7 @@ const steps = [
   },
 ] as const;
 
-export function ContactSection() {
+export function ContactSection({ headingLevel = 2 }: { headingLevel?: 1 | 2 }) {
   const callHref = toTelHref(clinic.phone);
   const address = formatAddress(clinic.address);
   const mapsHref = toSafeGoogleHref(clinic.googleMapsUrl);
@@ -48,6 +48,7 @@ export function ContactSection() {
     (entry) => entry.days.trim().length > 0 && entry.hours.trim().length > 0,
   );
   const hasDetails = Boolean((callHref && clinic.phone) || address || hours.length > 0);
+  const Heading = headingLevel === 1 ? "h1" : "h2";
 
   return (
     <section id="contact" aria-labelledby="contact-heading" tabIndex={-1}>
@@ -57,9 +58,9 @@ export function ContactSection() {
             <p className="text-sm font-semibold tracking-[0.16em] text-on-accent-muted uppercase">
               {callHref || address ? "Visit or call" : "Get in touch"}
             </p>
-            <h2 id="contact-heading" className="mt-3 font-serif text-4xl leading-tight sm:text-5xl">
+            <Heading id="contact-heading" className="mt-3 font-serif text-4xl leading-tight sm:text-5xl">
               Contact the clinic
-            </h2>
+            </Heading>
             <p className="mt-5 max-w-sm text-base leading-7 text-on-accent-muted">
               Use the Google profile for the public listing. This website does not take appointment
               requests or payments.

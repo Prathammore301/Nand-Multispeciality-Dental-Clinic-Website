@@ -6,13 +6,17 @@ export function SectionHeading({
   eyebrow,
   title,
   titleId,
+  level = 2,
   children,
 }: {
   eyebrow?: string;
   title: string;
   titleId: string;
+  level?: 1 | 2;
   children?: ReactNode;
 }) {
+  const Title = level === 1 ? "h1" : "h2";
+
   return (
     <div className="max-w-2xl">
       {eyebrow ? (
@@ -20,7 +24,7 @@ export function SectionHeading({
           {eyebrow}
         </p>
       ) : null}
-      <h2
+      <Title
         id={titleId}
         className={cx(
           "font-serif text-3xl leading-tight text-ink sm:text-4xl",
@@ -28,7 +32,7 @@ export function SectionHeading({
         )}
       >
         {title}
-      </h2>
+      </Title>
       {children ? (
         <p className="mt-4 text-base leading-7 text-muted sm:text-lg sm:leading-8">{children}</p>
       ) : null}

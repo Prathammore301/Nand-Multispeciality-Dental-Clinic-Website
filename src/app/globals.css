@@ -63,20 +63,19 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
-footer a:focus-visible {
-  outline-color: var(--on-accent);
-}
-
 .skip-link {
   position: absolute;
   left: 1rem;
   top: 1rem;
   z-index: 60;
   transform: translateY(-160%);
+  border: 0;
   background: var(--accent);
   color: var(--on-accent);
   padding: 0.75rem 1rem;
+  font: inherit;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .skip-link:focus {

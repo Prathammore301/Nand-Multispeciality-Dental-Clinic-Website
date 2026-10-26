@@ -122,9 +122,13 @@ export const routes = {
   gallery: "/gallery",
   contact: "/contact",
   doctors: "/doctors",
-  guide: "/#guide",
-  questions: "/#faq",
-  reviews: "/#reviews",
+} as const;
+
+/** Home-page section ids. Navigation scrolls to these without a URL hash. */
+export const homeSections = {
+  guide: "guide",
+  questions: "faq",
+  reviews: "reviews",
 } as const;
 
 export const publicPaths = [
@@ -140,7 +144,7 @@ export const navigation = [
   { href: routes.about, label: "About" },
   { href: routes.services, label: "Services" },
   { href: routes.gallery, label: "Gallery" },
-  { href: routes.reviews, label: "Reviews" },
+  { href: routes.home, label: "Reviews", sectionId: homeSections.reviews },
   { href: routes.contact, label: "Contact" },
 ] as const satisfies readonly NavItem[];
 

@@ -1,6 +1,7 @@
 export type NavItem = {
   href: string;
   label: string;
+  sectionId?: string;
 };
 
 export type DentistProfile = {

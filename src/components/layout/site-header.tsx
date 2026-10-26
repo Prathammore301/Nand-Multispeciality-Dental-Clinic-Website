@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { clinic, navigation, routes } from "@/config/clinic";
+import { SectionLink } from "@/components/layout/section-link";
 import { ButtonLink } from "@/components/ui/button-link";
 import { toTelHref } from "@/lib/utils";
 
@@ -26,14 +27,14 @@ export function SiteHeader() {
         <div className="flex items-center gap-2 sm:gap-5">
           <nav aria-label="Primary" className="hidden items-center gap-8 xl:flex">
             {navigation.map((item) =>
-              item.href.includes("#") ? (
-                <a
-                  key={item.href}
-                  href={item.href}
+              "sectionId" in item ? (
+                <SectionLink
+                  key={item.label}
+                  sectionId={item.sectionId}
                   className="text-sm font-medium text-muted transition-colors duration-150 hover:text-accent"
                 >
                   {item.label}
-                </a>
+                </SectionLink>
               ) : (
                 <Link
                   key={item.href}
